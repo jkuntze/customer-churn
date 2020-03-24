@@ -84,11 +84,11 @@ See the following notebook for details:
 
 True positive rate (also called recall) and the F1 score were used to evaluate model performance. Recall is relevant because it would be useful to flag customers showing higher churn risk. The indicators are given by the following equations:
 
-$recall = \frac{True Positives}{True Positives + False Negatives}$
+recall True Positives/(True Positives + False Negatives)
 
-$precision = \frac{True Positives}{True Positives + False Positives}$
+precision = True Positives/(True Positives + False Positives)
 
-$F_1score = 2*\frac{precision*recall}{precision+recall}$
+F1_score = 2*precision*recall/(precision+recall)
 
 - Recall is the number of positive predictions divided by the number of positive class values in the test data. It is also called sensitivity, true positive rate, or probability of detection. It measures the proportion of actual positives that are correctly identified as such.
 - Precision is the number of positive predictions divided by the total number of positive class values predicted.
