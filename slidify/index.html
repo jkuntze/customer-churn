@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prediction of customer churn</title>
+  <meta name="description" content="">
+  <meta name="author" content="JKuntze">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  <h1>Prediction of</h1>
+  <h1>Customer churn</h1>
+
+<p><br>
+<strong>Advanced Data Science Capstone</strong>
+<strong>offered by IBM via Coursera</strong>
+<br>
+<br>
+<br>
+JKuntze</p>
+
+  
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h2>The dataset</h2>
+  <p>The dataset was obtained from <a href="https://www.kaggle.com/blastchar/telco-customer-churn" target="_blank" rel="noopener noreferrer">Kaggle</a>
+<br>
+<br>
+From the context section on the Kaggle page: &quot;Predict behavior to retain customers. You can analyze all relevant customer data and develop focused customer retention programs.&quot; <br>
+[IBM Sample Data Sets]
+<br>
+<br>
+It contains 7043 rows and 21 columns (including the dependent variable).</p>
+
+  
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h2>The use case</h2>
+  <p>Customer churn = loss of clients or customers
+<br>
+<br>
+Key metric for telephone service companies, internet service providers, cable TV firms, insurance firms
+<br>
+<br>
+<strong>WHY?</strong>
+<br>
+Cost of retaining an existing customer &lt;&lt; Cost of acquiring a new one.
+<br>
+<br>
+It would be useful to companies to know which customers are likely to cancel services and contracts ahead of time. This project seeks to predict customer churn.</p>
+
+  
+</section>
+<section class='' data-state='' id='slide-4'>
+  <h2>The solution to the use case</h2>
+  <p>The solution is a report presenting a process to build a model to predict customer churn.
+<br>
+<br>
+The report can be found <a href="https://jkuntze.github.io/customer-churn/" target="_blank" rel="noopener noreferrer">here</a>.
+<br>
+<br>
+The Jupyter Notebooks used to develop the model are available on 
+<a href="https://github.com/jkuntze/customer-churn/" target="_blank" rel="noopener noreferrer">github</a>.</p>
+
+  
+</section>
+<section class='' data-state='' id='slide-5'>
+  <h2>Architectural choices</h2>
+  <p>Data were stored in a CSV file. 
+<br>
+<br>
+Data quality assessment, data pre-processing, feature engineering, model definition, model training and model evaluation were performed using Jupyter Notebooks, Python, pandas, Matplotlib, scikit-learn and Keras.
+<br>
+<br>
+Data products: </p>
+
+<ul>
+<li>report - Jupyter Notebooks, HTML</li>
+<li>presentation - R and slidify, HTML, CSS
+<br>
+<br>
+The complete Architectural Decisions Document can be found
+<a href="https://jkuntze.github.io/customer-churn/#Architectural-Decisions-Document" target="_blank" rel="noopener noreferrer"> here</a>.</li>
+</ul>
+
+  
+</section>
+<section class='' data-state='' id='slide-6'>
+  <h2>Data quality assessment</h2>
+  <p>The dataset codebook can be found <a href="https://jkuntze.github.io/customer-churn/#Dataset-codebook" target="_blank" rel="noopener noreferrer"> here</a>.
+<br></p>
+
+<ul>
+<li>There were eleven entries showing empty values in the TotalCharges column.</li>
+<li>There were no issues regarding emptyness, uniqueness or set memberships.</li>
+<li>Foreign key set memberships, regular expressions and cross-field validation did not apply to this dataset.</li>
+</ul>
+
+  
+</section>
+<section class='' data-state='' id='slide-7'>
+  <h2>Data pre-processing</h2>
+  <ul>
+<li>The rows showing empty values in the TotalCharges column were deleted.</li>
+<li>Numerical features were normalized and centered.
+<br>
+<br>
+<br></li>
+</ul>
+
+<h2>Feature engineering</h2>
+
+<ul>
+<li>One hot encoding was applied to categorical features.</li>
+</ul>
+
+  
+</section>
+<section class='' data-state='' id='slide-8'>
+  <h2>Model performance indicators</h2>
+  <p>Indicators: True positive rate (recall) + F1 score 
+<br>
+<strong>Recall</strong>: useful to flag customers showing higher churn risk. 
+<br>
+<br></p>
+
+<div>$recall = \frac{True Positives}{True Positives + False Negatives}$</div>
+
+<p><br></p>
+
+<div>$precision = \frac{True Positives}{True Positives + False Positives}$</div>
+
+<p><br></p>
+
+<div>$F_1score = 2*\frac{precision*recall}{precision+recall}$</div>
+
+  
+</section>
+<section class='' data-state='' id='slide-9'>
+  <h2>Model algorithm</h2>
+  <style>
+#slide-9 table {
+  font-size: 22px;
+}
+</style>
+
+<table><thead>
+<tr>
+<th>Algorithm</th>
+<th>Scaled numerical features</th>
+<th>Recall Churn = 1</th>
+<th>f1-score Churn = 1</th>
+<th>weighted f1-score</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Logistic regression</td>
+<td>No</td>
+<td>0.55</td>
+<td>0.57</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>Neural network</td>
+<td>No</td>
+<td>0.37</td>
+<td>0.49</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>Logistic regression</td>
+<td>Yes</td>
+<td>0.81</td>
+<td>0.62</td>
+<td>0.75</td>
+</tr>
+<tr>
+<td>Neural network</td>
+<td>Yes</td>
+<td>0.54</td>
+<td>0.59</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>Deep Neural network</td>
+<td>Yes</td>
+<td>0.54</td>
+<td>0.59</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>k-nearest neighbors</td>
+<td>Yes</td>
+<td>0.62</td>
+<td>0.61</td>
+<td>0.79</td>
+</tr>
+<tr>
+<td>Support vector machine</td>
+<td>Yes</td>
+<td>0.51</td>
+<td>0.59</td>
+<td>0.80</td>
+</tr>
+<tr>
+<td>Gradient boosting</td>
+<td>Yes</td>
+<td>0.58</td>
+<td>0.62</td>
+<td>0.81</td>
+</tr>
+</tbody></table>
+
+<p><br></p>
+
+<p>Logistic regression: best recall performance, simple and easy to interpret.</p>
+
+  
+</section>
+<section class='' data-state='' id='slide-10'>
+  <h2>Model performance</h2>
+  <p><strong>Logistic regression</strong></p>
+
+<style>
+#slide-10 table {
+  font-size: 22px;
+}
+</style>
+
+<table><thead>
+<tr>
+<th>dataset</th>
+<th>Recall Churn = 1</th>
+<th>f1-score Churn = 1</th>
+<th>weighted f1-score</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>training</td>
+<td>0.79</td>
+<td>0.62</td>
+<td>0.76</td>
+</tr>
+<tr>
+<td>testing</td>
+<td>0.78</td>
+<td>0.62</td>
+<td>0.76</td>
+</tr>
+</tbody></table>
+
+  
+</section>
+<section class='' data-state='' id='slide-11'>
+  <h2>Acknowledgement</h2>
+  <p>Thank you to all instructors of the <a href="https://www.coursera.org/specializations/advanced-data-science-ibm" target="_blank" rel="noopener noreferrer"> Advanced Data Science with IBM Specialization</a>, specially to Romeo Kienzler for his enthusiasm, efforts and time dedicated to the specialization community.</p>
+
+  
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'default', 
+    transition: Reveal.getQueryHash().transition || 'default', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
