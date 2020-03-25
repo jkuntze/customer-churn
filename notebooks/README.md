@@ -201,6 +201,12 @@ Please describe what technology you have defined here. Please justify below, why
 Please justify your technology choices here.
 - Python and Matplotlib are sufficient to explore the data. Jupyter Notebook and Pandas make it easier to accomplish this task and document the findings.
 
+#### Why have I chosen a specific method for data quality assessment?
+- Data cleansing is important to make sure the model is based on consistent data. If the training data is inconsistent (for example inappropriate handling of missing values, inappropriate variable types, inconsistencies among variables) the model cannot perform adequately on testing data and later in production. I removed eleven rows that showed missing values for the TotalCharges column, and checked for uniqueness and emptyness in the customerID variable, plus membership sets in the categorical variables.
+    
+#### Why have I chosen a specific method for feature engineering?
+- Feature creation/engineering allows for refining the model by aggregating data, combining features and creating non-linear relationships and interactions among features. I performed one hot encoding on the categorical variables, mapped binary string objects to integers (equivalent to one hot encoding for binary variables) and normalized/centered numerical variables. Normalized/centered numerical variables improved model performance significantly.
+
 ## 1.7 Actionable Insights
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.7.1 Technology Choice
@@ -209,7 +215,16 @@ Please describe what technology you have defined here. Please justify below, why
 
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.7.2 Justification
 Please justify your technology choices here.
-- I am familiar with the technolopgy listed above. Limited amount data makes it feasible to complete the project using it.
+- I am familiar with the technolopgy listed above. Limited amount of data makes it feasible to complete the project using it.
+
+#### Why have I chosen a specific algorithm?
+- In the end I chose the logistic regression algorithm because it presented the highest recall performance, it's simple and the output model is easy to interpret. To get there, I used neural networks (shallow and deep), k-nearest neighbors, SVM and gradient boosting. I think the limited amount of that was the reason the more evolved algorithms didn't perform as well as the logistic regression.
+
+#### Why have I chosen a specific framework?
+- I used Jupyter Notebook, Python, pandas, scikit-learn and Keras  because I am familiar with this framework. Moreover, limited amount of data makes it feasible to complete the project using it. 
+
+#### Why have I chosen a specific model performance indicator?
+- I chose true positive rate (also called recall) and the F1 score to evaluate model performance. Recall is relevant because it would be useful to flag customers showing higher churn risk. I put emphasis on recall because it's better to have false positives, meaning classifying customers who are unlikely to stop doing business with the company as a potential churn, that false negatives (not flagging customers likely to leave the business). I used weighted F1 score to evaluate the balance between precision and recall; I used the weighted version because the distribution of the Churn varaible is imbalanced. 
 
 ## 1.8 Applications / Data Products
 
